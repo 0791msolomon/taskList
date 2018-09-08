@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getAllPeople, setActivePerson } from "../actions";
 import * as peopleServices from "../services/services.people";
+import { Link } from "react-router-dom";
 
 class LandingPage extends Component {
   constructor(props) {
@@ -22,9 +23,13 @@ class LandingPage extends Component {
   renderList = () => {
     return this.props.people.map(person => {
       return (
-        <div key={person.name} className="card" style={{ width: "18rem" }}>
+        <div
+          key={person.name}
+          className="card mt-4 col-lg-3 col-sm-6 px-1"
+          style={{ width: "18rem" }}
+        >
           <div className="card-body">
-            <h5 className="card-title">{person.name}</h5>
+            <h5 className="card-title userName">{person.name}</h5>
             <p className="card-text">
               <strong>Age: </strong>
               {person.age}
@@ -48,70 +53,7 @@ class LandingPage extends Component {
     });
   };
   renderActiveUser = () => {
-    return (
-      <div style={{ textAlign: "center" }} className="jumbotron mx-5">
-        <div className="container">
-          <h1 className="display-3">
-            <strong>User Name: </strong>
-            {this.props.activePerson.name}
-          </h1>
-          <button className="btn-success">Edit User</button>
-
-          <button className="btn-danger" style={{ marginLeft: "1%" }}>
-            Delete User
-          </button>
-          <hr className="my-4" />
-          <p>
-            <strong>Name: </strong>
-            {this.props.activePerson.name}
-            <br />
-            <strong>Age: </strong>
-            {this.props.activePerson.age}
-            <br />
-            <strong>Birthplace: </strong>
-            {this.props.activePerson.birthplace}
-            <br />
-            <strong>Current Location: </strong>
-            {this.props.activePerson.currentLocation}
-          </p>
-          <p className="lead">
-            <a
-              className="btn btn-primary btn-lg"
-              href="#"
-              role="button"
-              data-toggle="collapse"
-              data-target="#taskList"
-              style={{ marginRight: "1%" }}
-            >
-              Show Task List
-            </a>
-            <a
-              className="btn btn-primary btn-lg"
-              href="#"
-              role="button"
-              data-toggle="modal"
-              data-target="#myModal"
-            >
-              Add Task
-            </a>
-            <div>
-              <ul id="taskList" className="collapse">
-                <p>
-                  <strong>Tasks for {this.props.activePerson.name}</strong>
-                </p>
-                {this.props.activePerson.tasks ? (
-                  this.props.activePerson.tasks.map(task => {
-                    return <li>{task}</li>;
-                  })
-                ) : (
-                  <li>There are no tasks for {this.props.activePerson.name}</li>
-                )}
-              </ul>
-            </div>
-          </p>
-        </div>
-      </div>
-    );
+    return <p>hey</p>;
   };
   submit = event => {
     event.preventDefault();
@@ -125,10 +67,24 @@ class LandingPage extends Component {
   };
   render() {
     if (!this.props.people) {
-      return <div>nothing yet bud</div>;
+      return (
+        <div id="container">
+          <div className="wrapper animated slideInDown">
+            <div className="loader" />
+            Loading...
+          </div>
+        </div>
+      );
     }
     return (
       <div id="container">
+        <div className="text-right mr-3">
+          <Link to="/add">
+            <button type="submit" className="btn-sm btn-success">
+              Add Person &#10010;
+            </button>
+          </Link>
+        </div>
         <div id="myModal" className="modal fade" role="dialog">
           <div className="modal-dialog">
             <div className="modal-content">

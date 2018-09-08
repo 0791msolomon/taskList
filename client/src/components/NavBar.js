@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import * as peopleServices from "../services/services.people";
 import { filterPeople } from "../actions";
+import { Link } from "react-router-dom";
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -24,9 +25,7 @@ class NavBar extends React.Component {
     return (
       <div>
         <nav className=" navbar navbar-expand-lg navbar-dark bg-info">
-          <h3 className="navbar-brand" href="#">
-            TaskList
-          </h3>
+          <h3 className="navbar-brand appName">TaskList</h3>
           <button
             className="navbar-toggler"
             type="button"
@@ -41,14 +40,14 @@ class NavBar extends React.Component {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav  ml-lg-auto">
               <li className="nav-item ">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="/">
                   Home <span className="sr-only">(current)</span>
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" to="/members">
                   Members
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">
@@ -89,11 +88,3 @@ export default connect(
   null,
   { filterPeople }
 )(NavBar);
-
-{
-  /* <div className="navbar">
-<a href="#home">Home</a>
-<a href="#news">News</a>
-<a href="#contact">Contact</a>
-</div> */
-}
